@@ -1,10 +1,14 @@
 <section id="tasks">
   <header>
-    <h2>USERS Tasks</h2>
+    <h2>{{ userName() }}'s Tasks</h2>
     <menu>
-      <a>Add Task</a>
+      <a>Add Task for {{ userName() }}</a>
     </menu>
   </header>
 
-  <p>Todo ...</p>
+  <router-outlet />
+  <!-- @for(task of userTasks(); track task.id) {
+  <p>{{ task.title }}</p>
+  <p>{{ task.summary }}</p>
+  } -->
 </section>
