@@ -2,13 +2,9 @@
   <header>
     <h2>{{ userName() }}'s Tasks</h2>
     <menu>
-      <a>Add Task for {{ userName() }}</a>
+      <a routerLink="tasks/new">Add Task</a>
     </menu>
   </header>
 
   <router-outlet />
-  <!-- @for(task of userTasks(); track task.id) {
-  <p>{{ task.title }}</p>
-  <p>{{ task.summary }}</p>
-  } -->
 </section>
