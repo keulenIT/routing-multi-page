@@ -1,25 +1,27 @@
 import { Component, inject, input } from '@angular/core';
-import { UsersService } from '../users.service';
 import {
-  RouterOutlet,
-  RouterLink,
-  ResolveFn,
   ActivatedRouteSnapshot,
+  ResolveFn,
+  RouterLink,
+  RouterOutlet,
   RouterStateSnapshot,
 } from '@angular/router';
+
+import { UsersService } from '../users.service';
 
 @Component({
   selector: 'app-user-tasks',
   standalone: true,
+  imports: [RouterOutlet, RouterLink],
   templateUrl: './user-tasks.component.html',
   styleUrl: './user-tasks.component.css',
-  imports: [RouterLink, RouterOutlet],
 })
 export class UserTasksComponent {
-  userName = input<string>();
+  userName = input.required<string>();
+  message = input.required<string>();
 }
 
-export const resolveUsername: ResolveFn<string> = (
+export const resolveUserName: ResolveFn<string> = (
   activatedRoute: ActivatedRouteSnapshot,
   routerState: RouterStateSnapshot
 ) => {
@@ -29,4 +31,11 @@ export const resolveUsername: ResolveFn<string> = (
       (u) => u.id === activatedRoute.paramMap.get('userId')
     )?.name || '';
   return userName;
+};
+
+export const resolveTitle: ResolveFn<string> = (
+  activatedRoute,
+  routerState
+) => {
+  return resolveUserName(activatedRoute, routerState) + "'s Tasks";
 };
